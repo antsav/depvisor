@@ -1,0 +1,23 @@
+{
+  "name": "Depvisor",
+  "version": "0.0.1",
+  "description": "visualizer",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antsav/depvisor.git"
+  },
+  "keywords": [
+    "visor",
+    "dependancies"
+  ],
+  "author": "Anton",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/antsav/depvisor/issues"
+  },
+  "homepage": "https://github.com/antsav/depvisor"
+}
