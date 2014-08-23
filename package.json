@@ -24,6 +24,7 @@
     "serve-static": "^1.5.3",
     "http": "0.0.0",
     "finalhandler": "^0.1.0",
-    "colors": "^0.6.2"
+    "colors": "^0.6.2",
+    "file": "^0.2.2"
   }
 }

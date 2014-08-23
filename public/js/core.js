@@ -1,3 +1,5 @@
+
+
 // create an array with nodes
 var nodes = [
     {id: 1, label: 'Node 1', color:{background: '#ccc'}},
