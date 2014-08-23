@@ -1,3 +1,3 @@
 Depvisor
 
-Project dependancies visualizer
+Project dependencies visualizer
