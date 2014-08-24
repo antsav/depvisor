@@ -3,10 +3,15 @@
 <head>
     <title></title>
     <link rel="stylesheet" type="text/css" href="css/vis.min.css" />
-    <script src="dust-core.min.js"></script>
+    <script src="js/dust-core.min.js"></script>
+    <script>
+        var backModelFiles = "{.files}".split(',');
+    </script>
 </head>
 <body>
-graph {files}
+    {.name}
+
+
 <div id="dependencies"></div>
 <div id="info"></div>
 

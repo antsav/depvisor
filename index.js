@@ -32,12 +32,18 @@ walker.walk('/Users/anton/PROJECTS/depvisor', function(err, results) {
         }
     });
 
+    var model = {
+        name: 'Sample name',
+        files: collector
+    };
+
     app.get('/', function(req, res){
-        res.render('views/index.dust', {
-            name: 'Sample name',
-            files: collector
-        });
+        res.render(
+            'views/index.dust',
+            model
+        )
     });
+
 });
 
 var server = app.listen(8000, function() {
