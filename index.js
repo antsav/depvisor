@@ -3,16 +3,20 @@ var http =      require('http');
 var path =      require('path');
 var file =      require('file');
 var fs =        require('fs');
+var _ =         require('underscore');
 var colors =    require('colors');  // colors in console )
+var walker =    require('./core/walker.js');
 
 var app = express();
 
-app.set('views', __dirname + '/public/views');
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html')
+app.set('views', __dirname + '/public');
+app.engine('ejs', require('ejs').renderFile);
+app.set('view engine', 'ejs')
+app.use(express.static(__dirname + '/public'));
+//app.locals._ = _;
 
 app.get('/', function(req, res){
-    res.render('index.html');
+    res.render('views/index.ejs', {name: 'Sample name'});
 })
 
 var server = app.listen(3000, function() {

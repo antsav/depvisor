@@ -27,7 +27,8 @@ var options = {
     nodes: {
         shape: 'box',
         color: {border: '#ccc'}
-    }
+    },
+    stabilize: false
 };
 network = new vis.Network(container, data, options);
 
