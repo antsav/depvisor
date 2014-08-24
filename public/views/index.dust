@@ -6,7 +6,7 @@
     <script src="dust-core.min.js"></script>
 </head>
 <body>
-graph d {name}
+graph {files}
 <div id="dependencies"></div>
 <div id="info"></div>
 
