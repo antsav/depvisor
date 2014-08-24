@@ -3,9 +3,10 @@
 <head>
     <title></title>
     <link rel="stylesheet" type="text/css" href="css/vis.min.css" />
+    <script src="dust-core.min.js"></script>
 </head>
 <body>
-graph d {%= name %}
+graph d {name}
 <div id="dependencies"></div>
 <div id="info"></div>
 
