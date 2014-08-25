@@ -33,7 +33,7 @@ walker.walk('/Users/anton/PROJECTS/depvisor', function(err, results) {
     });
 
     var model = {
-        name: 'Sample name',
+        name: 'Dependencies visualizer',
         files: collector
     };
 

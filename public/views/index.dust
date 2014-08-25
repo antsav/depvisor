@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>{.name}</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
     <link rel="stylesheet" type="text/css" href="css/vis.min.css" />
-    <script src="js/dust-core.min.js"></script>
-    <script>
-        var backModelFiles = "{.files}".split(',');
-    </script>
+    <link rel="stylesheet" type="text/css" href="css/core.css" />
+    <script> var backModelFiles = "{.files}".split(',');</script>
 </head>
 <body>
     {.name}
 
 
-<div id="dependencies"></div>
-<div id="info"></div>
+    <div id="dependencies"></div>
+    <div id="info"></div>
 
 <script src="js/vis.min.js"></script>
 <script src="js/core.js"></script>

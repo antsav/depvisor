@@ -1,20 +1,42 @@
+// colors
+var colors = {
+    purl:   '#C7F7EB',
+    violet: '#C7CFF7',
+    pink:   '#EEC7F7',
+    brown:  '#F7D1C6',
+    orange: '#F7E8C7',
+    yellow: '#F7F2C6',
+    green:  '#E8F7C6'
+};
 
-//  an array with nodes
-var nodes = [
-//
-//    {id: 1, label: '{name}', color:{background: '#ccc'}},
-//    {id: 2, label: 'Node 2'},
-//    {id: 3, label: 'Node 3'},
-//    {id: 4, label: 'Node 4'},
-//    {id: 5, label: 'Node 5'}
-];
+var associations = {
+    js:     colors.violet,
+    json:   colors.pink,
+    css:    colors.green,
+    dust:   colors.brown,
+    other:  colors.purl
+}
+
+var nodes = [];
+
+var matchColor = function (path) {
+    var color = associations.other;
+    Object.keys(associations).forEach(function (key) {
+        if (path.split('.').pop() === key) {
+            color =  associations[key];
+        }
+    });
+    return color;
+};
 
 for (var i = 0; i < backModelFiles.length ; i+=1){
-    nodes.push(
-        {
-            id: i,
-            label: backModelFiles[i].split('/').pop()
-        })
+    nodes.push({
+        id: i,
+        label: backModelFiles[i].split('/').pop(),
+        color: {
+            background: matchColor(backModelFiles[i])
+        }
+     });
 }
 
 // create an array with edges
