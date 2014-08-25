@@ -20,6 +20,7 @@
     "url": "https://github.com/antsav/depvisor/issues"
   },
   "homepage": "https://github.com/antsav/depvisor",
+
   "dependencies": {
     "body-parser": "^1.6.5",
     "colors": "^0.6.2",
