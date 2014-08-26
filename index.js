@@ -22,12 +22,14 @@ app.use(express.static(__dirname + '/public'));
 app.locals._ = _;
 
 
+var DIRECTORY = '/Users/anton/PROJECTS/depvisor';
+
 
 
 // queries through waterfall
 async.waterfall([
     function( callback ) {
-        walker.walk('/Users/anton/PROJECTS/depvisor', function(err, results) {
+        walker.walk(DIRECTORY, function(err, results) {
             if (err) throw err;
             var collector = [];
             results.forEach(function (result) {
@@ -42,7 +44,9 @@ async.waterfall([
     },
     function( paths, callback ) {
 
-        walker.read('public/views/index.dust', function (result) {
+        var readingFile = 'public/views/index.dust';
+        walker.read(readingFile, function (result) {
+
             var data = {
                 nodes: paths,
                 edges: result
@@ -57,26 +61,27 @@ async.waterfall([
         console.log( err );
         return;
     }
+    console.log( result );
+
 
     ////////
 
-//    var model = {
-//        name: 'Dependencies visualizer',
-//        files: collector,
-//        firstFile: 2
-//    };
-//
-//    app.get('/', function(req, res){
-//        res.render(
-//            'views/index.dust',
-//            model
-//        )
-//    });
+    var model = {
+        name: 'Dependencies visualizer',
+        nodes: result.nodes,
+        edges: result.edges
+    };
+
+    app.get('/', function(req, res){
+        res.render(
+            'views/index.dust',
+            model
+        )
+    });
 
     ///////
 
 
-    console.log( result );
 });
 
 

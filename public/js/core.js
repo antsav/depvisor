@@ -29,20 +29,20 @@ var matchColor = function (path) {
     return color;
 };
 
-for (var i = 0; i < backModelFiles.length ; i+=1){
+for (var i = 0; i < backNodes.length ; i+=1){
     nodes.push({
         id: i,
-        label: backModelFiles[i].split('/').pop(),
+        label: backNodes[i].split('/').pop(),
         color: {
-            background: matchColor(backModelFiles[i])
+            background: matchColor(backNodes[i])
         }
      });
 }
 
 // create an array with edges
 var edges = [
+    {from: 5, to: 10,  style: 'arrow'},
     {from: 1, to: 2,  style: 'arrow'},
-    {from: 1, to: 3},
     {from: 2, to: 4},
     {from: 2, to: 5}
 ];

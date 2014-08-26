@@ -30,7 +30,12 @@ var read = function (path, callback) {
     fs.readFile(path, 'utf8',
         function (err, data) {
         if (err) throw err;
-        callback( data.match(/<link.*href.*\/>/g) );
+
+        //TODO: regular expression to grab content out of href in:
+        // <link rel="stylesheet" type="text/css" href="css/reset.css" />
+        var result = data.match(/<link.*href.*\/>/g);
+
+        callback(result);
     });
 }
 
