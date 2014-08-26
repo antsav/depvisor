@@ -26,8 +26,21 @@ var walk = function(dir, done) {
     });
 };
 
+var read = function (path, callback) {
+    fs.readFile(path, 'utf8',
+        function (err, data) {
+        if (err) throw err;
+        callback( data.match(/<link.*href.*\/>/g) );
+    });
+}
+
+
+
+
 // exports
 module.exports.walk = walk;
+module.exports.read = read;
+
 
 
 
