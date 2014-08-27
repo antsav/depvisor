@@ -29,7 +29,7 @@ var DIRECTORY = '/Users/anton/PROJECTS/depvisor';
 // queries through waterfall
 async.waterfall([
     function( callback ) {
-        walker.walk(DIRECTORY, function(err, results) {
+        walker.walk(__dirname, function(err, results) {
             if (err) throw err;
             var collector = [];
             results.forEach(function (result) {

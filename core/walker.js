@@ -33,8 +33,11 @@ var read = function (path, callback) {
 
         //TODO: regular expression to grab content out of href in:
         // <link rel="stylesheet" type="text/css" href="css/reset.css" />
-        var result = data.match(/<link.*href.*\/>/g);
-
+        var regex = new RegExp('<link.*href="(.*)".*>', 'g');
+        var result = data.match(regex).map(function (result) {
+            var rege = new RegExp(  regex.toString().replace('/', '').replace('/g', '') );
+            return result.match(rege)[1];
+        });
         callback(result);
     });
 }
