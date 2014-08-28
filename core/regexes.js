@@ -1,5 +1,5 @@
-var regexes = [
-    /<link.*href.*\/>/g
+var list = [
+    '<link.*href="(.*)".*>'
 ]
 
-module.exports.regexes = regexes;
+module.exports.list = list;

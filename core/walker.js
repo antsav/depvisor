@@ -1,7 +1,18 @@
 // dependencies
-var fs = require('fs');
+var fs =        require('fs');
+var regexes =   require('../core/regexes');
 
-// function declarations
+// operating functions
+var sharedSubstring = function (array){
+    var A= array.slice(0).sort(),
+        word1= A[0], word2= A[A.length-1],
+        L= word1.length, i= 0;
+    while(i<L && word1.charAt(i)=== word2.charAt(i)) i++;
+    return word1.substring(0, i);
+}
+
+
+// exporting functions
 var walk = function(dir, done) {
     var results = [];
     fs.readdir(dir, function(err, list) {
@@ -27,27 +38,48 @@ var walk = function(dir, done) {
 };
 
 var read = function (path, callback) {
+    var linksPathsInFile = [];
     fs.readFile(path, 'utf8',
         function (err, data) {
-        if (err) throw err;
+            if (err) throw err;
 
-        //TODO: regular expression to grab content out of href in:
-        // <link rel="stylesheet" type="text/css" href="css/reset.css" />
-        var regex = new RegExp('<link.*href="(.*)".*>', 'g');
-        var result = data.match(regex).map(function (result) {
-            var rege = new RegExp(  regex.toString().replace('/', '').replace('/g', '') );
-            return result.match(rege)[1];
-        });
-        callback(result);
+            regexes.list.forEach(function (regString) {
+                var regex = new RegExp(regString, 'g');
+                var linksCollection = data.match(regex);
+
+                if (linksCollection !== null) {
+                    linksCollection.forEach(function (eachOccurance) {
+                        var rege = new RegExp( regex.toString().replace('/', '').replace('/g', '') );
+                        linksPathsInFile.push(eachOccurance.match(rege)[1]);
+                    });
+                } // if (linksCollection !== null) {
+            }); // regexes.list.forEach(function (regString) {
+
+            callback(linksPathsInFile); // outputing on read complete
+
+        }); //fs.readFile(path, 'utf8',
+} // var read
+
+
+var pathIndexBySubpath = function (paths, subpath) {
+//    console.log(paths[5].indexOf(subpath));
+//    console.log(subpath);
+
+    paths.forEach(function (singlePath, singlePathIndex) {
+//        console.log(singlePath.indexOf(subpath), singlePathIndex);
+
+        if (singlePath.indexOf(subpath) !== -1) {
+            return singlePathIndex;
+        }
     });
-}
 
-
-
+} // var pathIndexByName
 
 // exports
 module.exports.walk = walk;
 module.exports.read = read;
+module.exports.pathIndexBySubpath = pathIndexBySubpath;
+
 
 
 

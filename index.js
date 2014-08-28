@@ -43,17 +43,35 @@ async.waterfall([
         });
     },
     function( paths, callback ) {
-
+        var data = {};
         var readingFile = 'public/views/index.dust';
-        walker.read(readingFile, function (result) {
 
-            var data = {
-                nodes: paths,
-                edges: result
-            }
-            console.log('   connections associated'.green);
-            callback( null, data );
+
+
+
+
+        paths.forEach(function (onePath, pathIndex) {
+
+
+            walker.read(onePath, function (fileLinks) {
+                fileLinks.forEach(function (fileLink) {
+//                    walker.pathIndexBySubpath(paths, fileLink)
+
+                    //TODO: output of files associated indexes as FROM value
+                    //TODO: pathIndex will be a TO value for edges
+                    console.log( walker.pathIndexBySubpath(paths, fileLink) );
+                });
+
+
+//                console.log(filenameIndex, pathIndex, onePath, result);
+
+            });
+
         });
+
+        callback( null, data );
+
+        console.log('   connections associated'.green);
 
     }
 ], function( err, result ) {
@@ -61,7 +79,7 @@ async.waterfall([
         console.log( err );
         return;
     }
-    console.log( result );
+//    console.log( result );
 
 
     ////////
