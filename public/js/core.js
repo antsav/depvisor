@@ -40,12 +40,12 @@ for (var i = 0; i < backNodes.length ; i+=1){
 }
 
 // create an array with edges
-var edges = [
-    {from: 5, to: 10,  style: 'arrow'},
-    {from: 1, to: 2,  style: 'arrow'},
-    {from: 2, to: 4},
-    {from: 2, to: 5}
-];
+//var edges = [
+//    {from: 5, to: 10,  style: 'arrow'},
+//    {from: 1, to: 2,  style: 'arrow'},
+//    {from: 2, to: 4},
+//    {from: 2, to: 5}
+//];
 
 // create a network
 var container = document.getElementById('dependencies');

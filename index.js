@@ -43,52 +43,41 @@ async.waterfall([
         });
     },
     function( paths, callback ) {
-        var data = {};
-        var readingFile = 'public/views/index.dust';
-
-
-
-
-
+        var assoc = {
+            nodes: paths,
+            edges: []
+        };
         paths.forEach(function (onePath, pathIndex) {
+                var linksPathsInFile =  walker.read(onePath);
+                linksPathsInFile.forEach(function (fileLink) {
+                    var subIndex = walker.pathIndexBySubpath(paths, fileLink);
+                    if (subIndex !== undefined){
+                        assoc.edges.push({
+                            from:   subIndex,
+                            to:     pathIndex,
+                            style:  'arrow'
+                        });
+                    }
 
-
-            walker.read(onePath, function (fileLinks) {
-                fileLinks.forEach(function (fileLink) {
-//                    walker.pathIndexBySubpath(paths, fileLink)
-
-                    //TODO: output of files associated indexes as FROM value
-                    //TODO: pathIndex will be a TO value for edges
-                    console.log( walker.pathIndexBySubpath(paths, fileLink) );
                 });
-
-
-//                console.log(filenameIndex, pathIndex, onePath, result);
-
-            });
-
         });
-
-        callback( null, data );
-
+//        console.log(assoc);
         console.log('   connections associated'.green);
 
+
+        callback( null, assoc );
+
+
     }
-], function( err, result ) {
+], function( err, model ) {
     if ( err ) {
         console.log( err );
         return;
     }
-//    console.log( result );
+//    console.log( model );
 
+    model.name = 'Dependencies visualizer',
 
-    ////////
-
-    var model = {
-        name: 'Dependencies visualizer',
-        nodes: result.nodes,
-        edges: result.edges
-    };
 
     app.get('/', function(req, res){
         res.render(
@@ -96,8 +85,6 @@ async.waterfall([
             model
         )
     });
-
-    ///////
 
 
 });

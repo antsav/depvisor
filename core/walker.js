@@ -37,42 +37,34 @@ var walk = function(dir, done) {
     });
 };
 
-var read = function (path, callback) {
+var read = function (path) {
+    var oneFile = fs.readFileSync(path,'utf8');
     var linksPathsInFile = [];
-    fs.readFile(path, 'utf8',
-        function (err, data) {
-            if (err) throw err;
 
-            regexes.list.forEach(function (regString) {
-                var regex = new RegExp(regString, 'g');
-                var linksCollection = data.match(regex);
+    regexes.list.forEach(function (regString) {
+        var regex = new RegExp(regString, 'g');
+        var linksCollection = oneFile.match(regex);
 
-                if (linksCollection !== null) {
-                    linksCollection.forEach(function (eachOccurance) {
-                        var rege = new RegExp( regex.toString().replace('/', '').replace('/g', '') );
-                        linksPathsInFile.push(eachOccurance.match(rege)[1]);
-                    });
-                } // if (linksCollection !== null) {
-            }); // regexes.list.forEach(function (regString) {
+        if (linksCollection !== null) {
+            linksCollection.forEach(function (eachOccurance) {
+                var rege = new RegExp( regex.toString().replace('/', '').replace('/g', '') );
+                linksPathsInFile.push(eachOccurance.match(rege)[1]);
+            });
+        } // if (linksCollection !== null) {
+    }); // regexes.list.forEach(function (regString) {
 
-            callback(linksPathsInFile); // outputing on read complete
-
-        }); //fs.readFile(path, 'utf8',
+    return linksPathsInFile;
 } // var read
 
 
-var pathIndexBySubpath = function (paths, subpath) {
-//    console.log(paths[5].indexOf(subpath));
-//    console.log(subpath);
-
+var pathIndexBySubpath = function (paths, fileLink) {
+    var a;
     paths.forEach(function (singlePath, singlePathIndex) {
-//        console.log(singlePath.indexOf(subpath), singlePathIndex);
-
-        if (singlePath.indexOf(subpath) !== -1) {
-            return singlePathIndex;
+        if (singlePath.indexOf(fileLink) !== -1) {
+            a = singlePathIndex;
         }
     });
-
+    return a;
 } // var pathIndexByName
 
 // exports

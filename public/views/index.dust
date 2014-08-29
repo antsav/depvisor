@@ -7,12 +7,20 @@
     <link rel="stylesheet" type="text/css" href="css/core.css" />
     <script>
         var backNodes = "{.nodes}".split(',');
-
-
-        var backEdges = '{.edges}';
+        var edges = [
+            {#edges}
+                {
+                    from:   {.from},
+                    to:     {.to},
+                    style:  '{.style}'
+                }
+                {@sep},{/sep}
+            {/edges}
+        ];
     </script>
 </head>
 <body>
+
     {.name}
 
 
