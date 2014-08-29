@@ -22,9 +22,6 @@ app.use(express.static(__dirname + '/public'));
 app.locals._ = _;
 
 
-var DIRECTORY = '/Users/anton/PROJECTS/depvisor';
-
-
 
 // queries through waterfall
 async.waterfall([
@@ -61,23 +58,16 @@ async.waterfall([
 
                 });
         });
-//        console.log(assoc);
         console.log('   connections associated'.green);
-
-
         callback( null, assoc );
-
-
     }
 ], function( err, model ) {
     if ( err ) {
         console.log( err );
         return;
     }
-//    console.log( model );
 
     model.name = 'Dependencies visualizer',
-
 
     app.get('/', function(req, res){
         res.render(
@@ -86,10 +76,7 @@ async.waterfall([
         )
     });
 
-
 });
-
-
 
 var server = app.listen(8000, function() {
     console.log('Server started on port '.rainbow, server.address().port);
