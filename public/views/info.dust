@@ -1,0 +1,15 @@
+<div class="info">
+    <h1>{name}</h1>
+    <div id="data">
+        <ul>
+            <li>
+                <label>Number of files: </label>
+                <span>{@size key=nodes /}</span>
+            </li>
+            <li>
+                <label>Graph connections: </label>
+                <span>{@size key=edges /}</span>
+            </li>
+        </ul>
+    </div>
+</div> {!<div class="info">!}

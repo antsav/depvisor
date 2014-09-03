@@ -1,6 +1,6 @@
 // dependencies
 var fs =        require('fs');
-var regexes =   require("../core/regexes");
+var regexes =   require('../core/regexes');
 
 // operating functions
 var sharedSubstring = function (array){

@@ -33,7 +33,7 @@
     "ejs-locals": "*",
     "express": "^4.8.5",
     "file": "^0.2.2",
-    "less-middleware": "*",
+    "less-middleware": "^1.0.4",
     "morgan": "^1.2.3",
     "serve-favicon": "^2.0.1",
     "underscore": "^1.6.0"

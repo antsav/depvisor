@@ -1,24 +1,30 @@
-var express =   require('express');
-var async =     require('async');
-var http =      require('http');
-var path =      require('path');
-var file =      require('file');
+var express =           require('express');
+var async =             require('async');
+var http =              require('http');
+var path =              require('path');
+var file =              require('file');
 //var fs =        require('fs');
-var dust =      require('dustjs-linkedin');
-var cons =      require('consolidate');
-var _ =         require('underscore');
-var colors =    require('colors');  // colors in console )
-var walker =    require('./core/walker.js');
+var dust =              require('dustjs-linkedin');
+var cons =              require('consolidate');
+var _ =                 require('underscore');
+var colors =            require('colors');  // colors in console )
+var walker =            require('./core/walker.js');
+var lessMiddleware =    require('less-middleware');
 
 var app = express();
 
 // config
+
 app.set('template_engine', 'dust');
-app.set('view engine', 'dust')
 app.set('domain', 'localhost');
-app.set('views', __dirname + '/public');
 app.engine('dust', cons.dust);
+cons.dust.helpers =     require('dustjs-helpers');
+app.set('view engine', 'dust')
+app.set('views', __dirname + '/public');
+
+app.use(lessMiddleware(__dirname + '/public'));
 app.use(express.static(__dirname + '/public'));
+
 app.locals._ = _;
 
 
@@ -58,6 +64,7 @@ async.waterfall([
 
                 });
         });
+
         console.log('   connections associated'.green);
         callback( null, assoc );
     }
@@ -67,7 +74,9 @@ async.waterfall([
         return;
     }
 
-    model.name = 'Dependencies visualizer',
+    console.log(model);
+
+    model.name = 'Dependencies Visualizer',
 
     app.get('/', function(req, res){
         res.render(

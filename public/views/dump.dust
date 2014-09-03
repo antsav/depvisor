@@ -1,0 +1,15 @@
+<script>
+    var backNodes = "{nodes}".split(',');
+    var edges = [
+        {#edges}
+        {
+            from:   {from},
+            to:     {to},
+            style:  '{style}'
+        }
+            {@sep},{/sep}
+        {/edges}
+    ];
+</script>
+
+{!{@contextDump key="current|full" to="output|console"/}!}

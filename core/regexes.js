@@ -1,7 +1,8 @@
 var list = [
     '<link.*href="(.+)".*>',
-    '<script.*src="(.+)".*</script>'
-//    'require."(.+)".'
+    '<script.*src="(.+)".*</script>',
+//    "render('.+',.+)",
+    'require."(.+)".'
 
 ]
 

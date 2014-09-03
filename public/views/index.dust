@@ -5,27 +5,12 @@
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
     <link rel="stylesheet" type="text/css" href="css/vis.min.css" />
     <link rel="stylesheet" type="text/css" href="css/core.css" />
-    <script>
-        var backNodes = "{.nodes}".split(',');
-        var edges = [
-            {#edges}
-                {
-                    from:   {.from},
-                    to:     {.to},
-                    style:  '{.style}'
-                }
-                {@sep},{/sep}
-            {/edges}
-        ];
-    </script>
+    {>"views/dump" /}
 </head>
 <body>
+    {>"views/info" /}
 
-    {.name}
-
-
-    <div id="dependencies"></div>
-    <div id="info"></div>
+<div id="dependencies"></div>
 
 <script src="js/vis.min.js"></script>
 <script src="js/core.js"></script>
