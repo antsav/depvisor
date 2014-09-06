@@ -55,7 +55,7 @@ async.waterfall([
             edges: []
         };
 
-
+        // todo: place excludes to regex above
         paths.forEach(function (eachPath, index) {
             excludes.list.forEach(function (eachExclude) {
                 if (eachPath.indexOf(eachExclude) > -1) {
