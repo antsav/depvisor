@@ -42,17 +42,26 @@ var read = function (path) {
     var linksPathsInFile = [];
 
     regexes.list.forEach(function (regString) {
-        var regex = new RegExp(regString, 'g');
+        var regex = new RegExp(regString, 'gi');
         var linksCollection = oneFile.match(regex);
-
+//        console.log(path, regex, linksCollection);
         if (linksCollection !== null) {
             linksCollection.forEach(function (eachOccurance) {
-                var rege = new RegExp( regex.toString().replace('/', '').replace('/g', '') );
-                linksPathsInFile.push(eachOccurance.match(rege)[1]);
+                var rege = new RegExp(
+                    regex.toString().replace('/', '').replace('/gi', '')
+                );
+                linksPathsInFile.push(
+                    eachOccurance.match(rege)[1]
+                        .replace('./', '')
+                        .replace('../', '')
+                        .replace(/ /g, '')
+                        .replace(/'/g, '')
+                        .replace(/,/g, '')
+                );
             });
         } // if (linksCollection !== null) {
     }); // regexes.list.forEach(function (regString) {
-
+//    console.log(linksPathsInFile);
     return linksPathsInFile;
 } // var read
 

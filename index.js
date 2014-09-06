@@ -32,6 +32,8 @@ app.locals._ = _;
 // queries through waterfall
 async.waterfall([
     function( callback ) {
+        // listing all files in direcory,
+        // returning array of files paths as strings
         walker.walk(__dirname, function(err, results) {
             if (err) throw err;
             var collector = [];
@@ -50,8 +52,17 @@ async.waterfall([
             nodes: paths,
             edges: []
         };
+
+//        walker.read(paths[2]);
+
+
+
+        // iterating through paths
         paths.forEach(function (onePath, pathIndex) {
+                // reading file on each path
+                // collecting regex matched links into array
                 var linksPathsInFile =  walker.read(onePath);
+//                console.log(onePath, linksPathsInFile); // file and found links
                 linksPathsInFile.forEach(function (fileLink) {
                     var subIndex = walker.pathIndexBySubpath(paths, fileLink);
                     if (subIndex !== undefined){
@@ -74,7 +85,7 @@ async.waterfall([
         return;
     }
 
-    console.log(model);
+//    console.log(model);
 
     model.name = 'Dependencies Visualizer',
 

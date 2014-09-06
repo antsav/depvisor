@@ -1,9 +1,8 @@
 var list = [
     '<link.*href="(.+)".*>',
     '<script.*src="(.+)".*</script>',
-//    "render('.+',.+)",
-    'require."(.+)".'
-
+    ".render.\n(.*)",
+    "require.'(.+.js)'."
 ]
 
 module.exports.list = list;
