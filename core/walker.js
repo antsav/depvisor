@@ -2,15 +2,6 @@
 var fs =        require('fs');
 var regexes =   require('../core/regexes');
 
-// operating functions
-var sharedSubstring = function (array){
-    var A= array.slice(0).sort(),
-        word1= A[0], word2= A[A.length-1],
-        L= word1.length, i= 0;
-    while(i<L && word1.charAt(i)=== word2.charAt(i)) i++;
-    return word1.substring(0, i);
-}
-
 
 // exporting functions
 var walk = function(dir, done) {
@@ -41,26 +32,34 @@ var read = function (path) {
     var oneFile = fs.readFileSync(path,'utf8');
     var linksPathsInFile = [];
 
-    regexes.list.forEach(function (regString) {
-        var regex = new RegExp(regString, 'gi');
-        var linksCollection = oneFile.match(regex);
+
+
+    regexes.list.forEach(function (regObject) {
+        regObject.regexes.forEach(function (regString) {
+
+            var regex = new RegExp(regString, 'gi');
+            var linksCollection = oneFile.match(regex);
 //        console.log(path, regex, linksCollection);
-        if (linksCollection !== null) {
-            linksCollection.forEach(function (eachOccurance) {
-                var rege = new RegExp(
-                    regex.toString().replace('/', '').replace('/gi', '')
-                );
-                linksPathsInFile.push(
-                    eachOccurance.match(rege)[1]
-                        .replace('./', '')
-                        .replace('../', '')
-                        .replace(/ /g, '')
-                        .replace(/'/g, '')
-                        .replace(/,/g, '')
-                );
-            });
-        } // if (linksCollection !== null) {
-    }); // regexes.list.forEach(function (regString) {
+            if (linksCollection !== null) {
+                linksCollection.forEach(function (eachOccurance) {
+                    var rege = new RegExp(
+                        regex.toString().replace('/', '').replace('/gi', '')
+                    );
+                    linksPathsInFile.push(
+                        eachOccurance.match(rege)[1]
+                            .replace('./', '')
+                            .replace('../', '')
+                            .replace(/ /g, '')
+                            .replace(/'/g, '')
+                            .replace(/,/g, '')
+                    );
+                });
+            } // if (linksCollection !== null) {
+
+
+        });
+    }); // regexes.list.forEach(function (regObject) {
+
 //    console.log(linksPathsInFile);
     return linksPathsInFile;
 } // var read

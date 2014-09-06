@@ -9,12 +9,14 @@ var cons =              require('consolidate');
 var _ =                 require('underscore');
 var colors =            require('colors');  // colors in console )
 var walker =            require('./core/walker.js');
+var excludes =          require('./core/excludes.js');
+
 var lessMiddleware =    require('less-middleware');
 
 var app = express();
 
-// config
 
+// config
 app.set('template_engine', 'dust');
 app.set('domain', 'localhost');
 app.engine('dust', cons.dust);
@@ -53,9 +55,14 @@ async.waterfall([
             edges: []
         };
 
-//        walker.read(paths[2]);
 
-
+        paths.forEach(function (eachPath, index) {
+            excludes.list.forEach(function (eachExclude) {
+                if (eachPath.indexOf(eachExclude) > -1) {
+                    paths.splice(index, 1);
+                }
+            });
+        });
 
         // iterating through paths
         paths.forEach(function (onePath, pathIndex) {
